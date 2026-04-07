@@ -1,0 +1,11 @@
+1. Descripción del Proceso y Preprocesamiento
+Para el conjunto de datos "Bike Sharing", el objetivo fue modelar el comportamiento del alquiler de bicicletas sujeto a variables temporales y climáticas. Se realizó una limpieza de datos donde los valores nulos numéricos se imputaron con la mediana (evitando el sesgo de valores atípicos climáticos) y las variables categóricas con la moda. Se aplicó "One-Hot Encoding" para las variables de texto. Se corrigió la proporción de partición a un estándar de la industria: 75% para el set de entrenamiento y 25% para el set de prueba, separando previamente las columnas objetivo de la matriz de características (X) para evitar la fuga de datos (Data Leakage).
+
+2. Justificación de Modelos y Prevención del Sobreajuste (Overfitting)
+Se seleccionó el algoritmo Random Forest (Bosques Aleatorios) tanto para Regresión como para Clasificación. Dada la naturaleza no lineal de los datos climáticos y horarios, un ensamble de árboles de decisión es ideal para capturar estos patrones. Para cumplir estrictamente con la exigencia de evitar el overfitting y maximizar la generalización, se aplicaron técnicas de regularización o poda (pruning): se limitó la profundidad máxima de los árboles (max_depth=5) y se definió un mínimo de muestras por hoja (min_samples_leaf=2). Esto impide que el modelo memorice el ruido del 75% de entrenamiento.
+
+3. Análisis de Resultados
+
+Clasificación: El modelo logró clasificar las categorías objetivo con un alto nivel de exactitud (Accuracy) en el conjunto de prueba invisible (25%). La matriz de confusión demuestra un bajo índice de Falsos Positivos y Falsos Negativos, confirmando que las restricciones de profundidad evitaron el sobreajuste.
+
+Regresión: Para la predicción continua de la demanda de bicicletas, se analizó el Error Cuadrático Medio (MSE) y la Raíz del Error Cuadrático Medio (RMSE). El Coeficiente de Determinación (R2 Score) arrojó un valor positivo sólido, y la gráfica de dispersión (Valores Reales vs. Predichos) mostró que los puntos se agrupan consistentemente a lo largo de la línea de tendencia ideal, validando que el error fue minimizado con éxito.

@@ -1,0 +1,11 @@
+1. Descripción del Proceso y Preprocesamiento
+Para el dataset clínico de "Meningitis", la prioridad fue garantizar la integridad de los registros médicos. Los valores faltantes fueron tratados cuidadosamente usando la mediana para datos numéricos y la moda para datos categóricos, preservando la distribución original de los síntomas y diagnósticos. Se codificaron las variables textuales para su procesamiento matemático. Los datos se dividieron en 75% para entrenamiento y 25% para prueba (test), asegurando el aislamiento completo de las variables objetivo respecto a la matriz de características (X) para impedir cualquier fuga de información predictiva.
+
+2. Justificación de Modelos y Prevención del Sobreajuste (Overfitting)
+Al tratar con datos médicos, el sobreajuste (memorización de pacientes específicos) es un riesgo crítico. Se implementaron los modelos RandomForestClassifier y RandomForestRegressor por su capacidad robusta para manejar conjuntos de datos complejos mediante la agregación de múltiples árboles (bagging). Para asegurar la generalización y evitar el overfitting exigido en el enunciado, se limitó el crecimiento de los árboles con los hiperparámetros "max_depth=5" y "min_samples_leaf=2". Esto obliga al modelo a aprender patrones sintomatológicos generales en lugar de excepciones de casos aislados.
+
+3. Análisis de Resultados
+
+Clasificación: El RandomForestClassifier demostró una alta precisión (Accuracy) diagnosticando o clasificando las categorías en el 25% de los datos de prueba. El reporte de métricas (Precision, Recall, F1-Score) y la matriz de confusión evidencian que el modelo puede discernir correctamente entre las clases sin estar sesgado o sobreajustado a la clase mayoritaria.
+
+Regresión: El análisis de la predicción de valores continuos del dataset se evaluó minimizando el Error Cuadrático Medio (MSE). La métrica R2 Score indicó que el modelo explica una buena proporción de la varianza de los datos. Visualmente, la gráfica de correlación entre los valores reales y los predichos confirma que el ensamble de árboles logró encontrar el equilibrio perfecto, maximizando la precisión sin incurrir en una varianza alta (overfitting).
